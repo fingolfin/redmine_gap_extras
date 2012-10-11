@@ -21,7 +21,7 @@ require 'redmine_gap_extras/gap_formatting'
 Redmine::Plugin.register :redmine_gap_extras do
   name 'GAP Extras plugin'
   author 'Max Horn'
-  description 'Add various tweaks needed for the GAP tracker'
+  description 'Add various tweaks to Redmine needed for the GAP issue tracker'
   version '0.1'
   url 'http://www.quendie.de/gap/redmine_gap_extras'
   author_url 'http://www.quendi.de'
