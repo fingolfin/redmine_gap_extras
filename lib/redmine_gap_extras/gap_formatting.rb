@@ -15,24 +15,37 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine'
-require 'redmine_gap_extras/gap_formatting'
+module RedmineGAPExtras
+  # Custom formatter module, based on the NullFormatter
+  class Formatter
+    include ActionView::Helpers::TagHelper
+    include ActionView::Helpers::TextHelper
+    include ActionView::Helpers::UrlHelper
+    include Redmine::WikiFormatting::LinksHelper
 
-Redmine::Plugin.register :redmine_gap_extras do
-  name 'GAP Extras plugin'
-  author 'Max Horn'
-  description 'Add various tweaks needed for the GAP tracker'
-  version '0.1'
-  url 'http://www.quendie.de/gap/redmine_gap_extras'
-  author_url 'http://www.quendi.de'
-  requires_redmine :version_or_higher => '2.0.0'
+    def initialize(text)
+      @text = text
+    end
 
-  # Register our custom wiki format provider
-  wiki_format_provider 'gap', RedmineGAPExtras::Formatter, RedmineGAPExtras::Helper
+    def to_html(*args)
+      t = CGI::escapeHTML(@text)
+      auto_link!(t)
+      auto_mailto!(t)
+      #simple_format(t, {}, :sanitize => false)
+      t = '<div style="white-space: pre-wrap;">' + t.to_str + '</div>'
+      t.html_safe
+    end
+  end
 
-end
+  module Helper
+    def wikitoolbar_for(field_id)
+    end
 
-# Prepare monkey patching the mail handler
-ActionDispatch::Callbacks.to_prepare do
-  require 'redmine_gap_extras/mail_handler_patch'
+    def heads_for_wiki_formatter
+    end
+
+    def initial_page_content(page)
+      page.pretty_title.to_s
+    end
+  end
 end
