@@ -22,10 +22,10 @@ Redmine::Plugin.register :redmine_gap_extras do
   name 'GAP Extras plugin'
   author 'Max Horn'
   description 'Add various tweaks to Redmine needed for the GAP issue tracker'
-  version '0.1'
-  url 'http://www.quendie.de/gap/redmine_gap_extras'
+  version '0.2'
+  url 'https://github.com/fingolfin/redmine_gap_extras'
   author_url 'http://www.quendi.de'
-  requires_redmine :version_or_higher => '2.0.0'
+  requires_redmine :version_or_higher => '2.2.0'
 
   # Register our custom wiki format provider
   wiki_format_provider 'gap', RedmineGAPExtras::Formatter, RedmineGAPExtras::Helper
@@ -35,4 +35,5 @@ end
 # Prepare monkey patching the mail handler
 ActionDispatch::Callbacks.to_prepare do
   require 'redmine_gap_extras/mail_handler_patch'
+  require 'redmine_gap_extras/mailer_patch'
 end
