@@ -41,9 +41,11 @@ module RedmineGAPExtras
         recipients = issue.recipients
         # Watchers in cc
         cc = issue.watcher_recipients - recipients
-        mail :to => recipients,
+        m = mail :to => recipients,
           :cc => cc,
           :subject => "[#{issue.project.name} ##{issue.id}] #{issue.subject}"
+        headers['From'] = "#{issue.author.name} <#{Setting.mail_from}>"
+        m
       end
 
       def issue_edit_with_hack(journal)
@@ -62,9 +64,11 @@ module RedmineGAPExtras
         recipients = journal.recipients
         # Watchers in cc
         cc = journal.watcher_recipients - recipients
-        mail :to => recipients,
+        m = mail :to => recipients,
           :cc => cc,
           :subject => "[#{issue.project.name} ##{issue.id}] #{issue.subject}"
+        headers['From'] = "#{issue.author.name} <#{Setting.mail_from}>"
+        m
       end
     end
   end
