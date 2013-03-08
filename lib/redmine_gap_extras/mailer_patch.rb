@@ -37,7 +37,9 @@ module RedmineGAPExtras
         @author = issue.author
         @issue = issue
         @issue_url = url_for(:controller => 'issues', :action => 'show', :id => issue)
+
         recipients = issue.recipients
+        # Watchers in cc
         cc = issue.watcher_recipients - recipients
         mail :to => recipients,
           :cc => cc,
@@ -53,12 +55,13 @@ module RedmineGAPExtras
         message_id journal
         references issue
         @author = journal.user
-        recipients = journal.recipients
-        # Watchers in cc
-        cc = journal.watcher_recipients - recipients
         @issue = issue
         @journal = journal
         @issue_url = url_for(:controller => 'issues', :action => 'show', :id => issue, :anchor => "change-#{journal.id}")
+
+        recipients = journal.recipients
+        # Watchers in cc
+        cc = journal.watcher_recipients - recipients
         mail :to => recipients,
           :cc => cc,
           :subject => "[#{issue.project.name} ##{issue.id}] #{issue.subject}"
