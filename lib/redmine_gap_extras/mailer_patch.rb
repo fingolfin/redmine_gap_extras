@@ -28,6 +28,7 @@ module RedmineGAPExtras
     end
 
     module InstanceMethods
+      # replacement for Mailer.issue.add
       def issue_add_with_hack(issue)
         redmine_headers 'Project' => issue.project.identifier,
                         'Issue-Id' => issue.id,
@@ -48,6 +49,7 @@ module RedmineGAPExtras
         m
       end
 
+      # replacement for Mailer.issue.edit
       def issue_edit_with_hack(journal)
         issue = journal.journalized.reload
         redmine_headers 'Project' => issue.project.identifier,

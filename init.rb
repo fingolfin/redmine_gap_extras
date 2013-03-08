@@ -22,7 +22,7 @@ Redmine::Plugin.register :redmine_gap_extras do
   name 'GAP Extras plugin'
   author 'Max Horn'
   description 'Add various tweaks to Redmine needed for the GAP issue tracker'
-  version '0.2'
+  version '0.3'
   url 'https://github.com/fingolfin/redmine_gap_extras'
   author_url 'http://www.quendi.de'
   requires_redmine :version_or_higher => '2.2.0'

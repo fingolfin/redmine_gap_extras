@@ -27,6 +27,7 @@ module RedmineGAPExtras
     end
 
     module InstanceMethods
+      # replacement for MailHandler.issue.plain_text_body
       def plain_text_body_with_hack
         return @plain_text_body unless @plain_text_body.nil?
     
