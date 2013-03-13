@@ -69,7 +69,7 @@ module RedmineGAPExtras
         m = mail :to => recipients,
           :cc => cc,
           :subject => "[#{issue.project.name} ##{issue.id}] #{issue.subject}"
-        headers['From'] = "#{issue.author.name} <#{Setting.mail_from}>"
+        headers['From'] = "#{journal.user.name} <#{Setting.mail_from}>"
         m
       end
     end
