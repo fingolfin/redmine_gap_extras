@@ -68,7 +68,7 @@ module RedmineGAPExtras
         cc = journal.watcher_recipients - recipients
         m = mail :to => recipients,
           :cc => cc,
-          :subject => "[#{issue.project.name} ##{issue.id}] #{issue.subject}"
+          :subject => "Re: [#{issue.project.name} ##{issue.id}] #{issue.subject}"
         headers['From'] = "#{journal.user.name} <#{Setting.mail_from}>"
         headers['In-Reply-To'] = headers[:references]
         m
