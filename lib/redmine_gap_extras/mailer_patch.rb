@@ -70,6 +70,7 @@ module RedmineGAPExtras
           :cc => cc,
           :subject => "[#{issue.project.name} ##{issue.id}] #{issue.subject}"
         headers['From'] = "#{journal.user.name} <#{Setting.mail_from}>"
+        headers['In-Reply-To'] = headers[:references]
         m
       end
     end
