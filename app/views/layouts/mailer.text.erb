@@ -1,4 +1,8 @@
+<% if not Setting.emails_header.empty? -%>
 <%= Setting.emails_header %>
+<% end -%>
 <%= yield %>
+<% if not Setting.emails_footer.empty? -%>
 -- 
 <%= Setting.emails_footer %>
+<% end -%>

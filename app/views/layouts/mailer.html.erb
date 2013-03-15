@@ -25,9 +25,13 @@ hr {
 </style>
 </head>
 <body>
+<% if not Setting.emails_header.empty? -%>
 <span class="header"><%= Redmine::WikiFormatting.to_html(Setting.text_formatting, Setting.emails_header).html_safe %></span>
+<% end -%>
 <%= yield %>
+<% if not Setting.emails_footer.empty? -%>
 <hr />
 <span class="footer"><%= Redmine::WikiFormatting.to_html(Setting.text_formatting, Setting.emails_footer).html_safe %></span>
+<% end -%>
 </body>
 </html>
